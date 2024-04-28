@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck30jxv8memex"]
+
+[ext_resource type="FontFile" uid="uid://biiru0m73dlqc" path="res://Assets/Staatliches/Staatliches-Regular.ttf" id="1_8y5ly"]
+[ext_resource type="Script" path="res://Player/game_over_menu.gd" id="2_hcbhe"]
+
+[sub_resource type="Theme" id="Theme_v2pyw"]
+default_font = ExtResource("1_8y5ly")
+default_font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_bd8vp"]
+line_spacing = 0.0
+font_size = 192
+
+[node name="GameOverMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_v2pyw")
+script = ExtResource("2_hcbhe")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(1024, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "YOU DEAD"
+label_settings = SubResource("LabelSettings_bd8vp")
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "AGAIN"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "I'M DONE"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

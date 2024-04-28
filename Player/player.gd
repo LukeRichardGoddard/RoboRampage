@@ -13,6 +13,7 @@ var mouse_motion := Vector2.ZERO
 
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var damage_animation_player: AnimationPlayer = $DamageTexture/AnimationPlayer
+@onready var game_over_menu: Control = $GameOverMenu
 
 var hitpoints: int = max_hitpoints:
 	set(value):
@@ -22,7 +23,7 @@ var hitpoints: int = max_hitpoints:
 		hitpoints = value
 		print(hitpoints)
 		if hitpoints <= 0:
-			get_tree().quit()
+			game_over_menu.game_over()
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
