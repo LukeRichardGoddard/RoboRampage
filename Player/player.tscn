@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://mam8dbmr258j"]
+[gd_scene load_steps=17 format=3 uid="uid://mam8dbmr258j"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_u4v5w"]
 [ext_resource type="Script" path="res://Player/SmoothCamera.gd" id="2_rkmoa"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" path="res://Player/Crosshair.gd" id="3_qxgik"]
 [ext_resource type="PackedScene" uid="uid://bvs7npkoi4mo" path="res://Weapons/smg.tscn" id="3_ub3xr"]
 [ext_resource type="Texture2D" uid="uid://c0wcpwivln8jj" path="res://Player/damage.png" id="5_kk0my"]
+[ext_resource type="Script" path="res://Player/AmmoHandler.gd" id="6_q10kf"]
 [ext_resource type="PackedScene" uid="uid://ck30jxv8memex" path="res://Player/game_over_menu.tscn" id="6_ul0sc"]
+[ext_resource type="FontFile" uid="uid://biiru0m73dlqc" path="res://Assets/Staatliches/Staatliches-Regular.ttf" id="9_afmxp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_5vxwg"]
 
@@ -73,6 +75,10 @@ _data = {
 "TakeDamage": SubResource("Animation_t0dni")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_n8a7s"]
+font = ExtResource("9_afmxp")
+font_size = 128
+
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_u4v5w")
 
@@ -116,9 +122,17 @@ script = ExtResource("3_5leop")
 weapon_1 = NodePath("Rifle")
 weapon_2 = NodePath("SMG")
 
-[node name="Rifle" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" instance=ExtResource("3_flveu")]
+[node name="Rifle" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" node_paths=PackedStringArray("ammo_handler") instance=ExtResource("3_flveu")]
+ammo_handler = NodePath("../../AmmoHandler")
 
-[node name="SMG" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" instance=ExtResource("3_ub3xr")]
+[node name="SMG" parent="SubViewportContainer/SubViewport/WeaponCamera/WeaponHandler" node_paths=PackedStringArray("ammo_handler") instance=ExtResource("3_ub3xr")]
+ammo_handler = NodePath("../../AmmoHandler")
+ammo_type = 1
+
+[node name="AmmoHandler" type="Node" parent="SubViewportContainer/SubViewport/WeaponCamera" node_paths=PackedStringArray("ammo_label")]
+unique_name_in_owner = true
+script = ExtResource("6_q10kf")
+ammo_label = NodePath("../../../../MarginContainer/AmmoLabel")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchors_preset = 15
@@ -148,6 +162,25 @@ autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_s1f1n")
 }
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="AmmoLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "999"
+label_settings = SubResource("LabelSettings_n8a7s")
 
 [node name="GameOverMenu" parent="." instance=ExtResource("6_ul0sc")]
 visible = false
