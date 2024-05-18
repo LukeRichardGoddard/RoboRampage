@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcxttg4ojy2x1"
-path.s3tc="res://.godot/imported/prototype-texture.png-b0cee8adf8425a207c773a857a055446.s3tc.ctex"
+uid="uid://blr6gfmv02ddk"
+path.s3tc="res://.godot/imported/Container_Palette-Base-SF.png-4eafb2dac34a75f24303cc9c71a1b79a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://Levels/Materials/prototype-texture.png"
-dest_files=["res://.godot/imported/prototype-texture.png-b0cee8adf8425a207c773a857a055446.s3tc.ctex"]
+source_file="res://Assets/Props/Container_Palette-Base-SF.png"
+dest_files=["res://.godot/imported/Container_Palette-Base-SF.png-4eafb2dac34a75f24303cc9c71a1b79a.s3tc.ctex"]
 
 [params]
 
