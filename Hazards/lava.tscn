@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bike7fahembv3"]
+
+[ext_resource type="Script" path="res://Hazards/lava.gd" id="1_1y85e"]
+[ext_resource type="Material" uid="uid://br685dmep4sgq" path="res://Hazards/LavaMaterial.tres" id="1_htdju"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iipmb"]
+resource_local_to_scene = true
+size = Vector2(10, 10)
+
+[node name="Lava" type="Area3D"]
+script = ExtResource("1_1y85e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_htdju")
+mesh = SubResource("PlaneMesh_iipmb")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+light_color = Color(1, 0.501961, 0, 1)
+light_energy = 2.0
+shadow_enabled = true
+omni_attenuation = 0.1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
